@@ -55,5 +55,4 @@ public class TestController {
 		private int age;
 	}
 	
-	
 }
