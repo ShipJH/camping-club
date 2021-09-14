@@ -18,8 +18,8 @@ public class UserController {
 	
 	@GetMapping(value = "user")
 	public String getUser() {
-		userService.getUser();
-		return "";
+		String result = userService.getUser();
+		return result;
 	}
 	
 }
