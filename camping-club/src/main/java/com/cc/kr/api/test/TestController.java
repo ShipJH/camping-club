@@ -20,7 +20,7 @@ public class TestController {
 	//http://localhost:8080/test?longValue=777 호출 테스트 url.
 	@GetMapping(value = "/test")
 	public String test(Long longValue) { 
-
+		
 		log.info("longValue param is : {}", LogUtil.toJSONString(longValue));
 		
 		HashMap<String, String> map = new HashMap<String, String>();

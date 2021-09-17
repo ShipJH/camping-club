@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<configuration>
+    <conversionRule conversionWord="ex" converterClass="com.cc.kr.config.ExceptionLogConverter"/>
+    <logger name="org.springframework" level="INFO" />
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.ExceptionHandlerExceptionResolver" level="ERROR" />
+    <logger name="org.springframework.beans.factory" level="WARN" />
+    <logger name="org.springframework.jdbc.support" level="WARN" />
+    <logger name="org.apache" level="INFO" />
+    <logger name="net.sf.ehcache" level="INFO" />
+    <logger name="org.apache.ibatis" level="INFO" />
+    <logger name="org.aspectj" level="INFO" />
+    <logger name="org.mybatis.spring" level="INFO" />
+    <logger name="com.zaxxer.hikari" level="INFO" />
+    <logger name="org.hibernate" level="INFO" />
+    <logger name="javax.management" level="WARN" />
+	<logger name="jdk.event.security" level="INFO" />
+<!-- 	<logger name="springfox" level="WARN" /> -->
+<!-- 	<logger name="io.sentry" level="INFO" /> -->
+
+
+	<!-- log file path --> 
+	<property name="LOG_PATH" value="/Users/shipjh/Documents/log"/> 
+
+	<!-- log file name --> 
+	<property name="LOG_FILE_NAME" value="camping-club"/>
+	<property name="ERR_LOG_FILE_NAME" value="err_log"/> 
+	
+	<!-- pattern --> 
+	<property name="LOG_PATTERN" value="%-5level %d{HH:mm:ss.SSS} %X{REQSEQ:--} %X{COMPANY:--} %X{MEMBER:--} %logger{36} - %msg %ex %n"/>
+
+    <springProfile name="local">
+        <logger name="org.springframework.cache" level="TRACE" />
+        <logger name="sun.rmi" level="INFO" />
+<!--         <logger name="springfox" level="DEBUG" /> -->
+
+        <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+            <encoder>
+                <pattern>${LOG_PATTERN}</pattern>
+            </encoder>
+        </appender>
+
+        <root level="TRACE">
+            <appender-ref ref="STDOUT" />
+        </root>
+    </springProfile>
+
+    <springProfile name="!local">
+        <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+            <file>${LOG_PATH}/${LOG_FILE_NAME}.log</file>
+            <append>true</append>
+
+            <encoder>
+                <pattern>${LOG_PATTERN}</pattern>
+            </encoder>
+
+            <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+                <fileNamePattern>${LOG_PATH}/${LOG_FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+            </rollingPolicy>
+<!--             <filter class="ch.qos.logback.core.filter.EvaluatorFilter"> -->
+<!--                 <evaluator> -->
+<!--                     <expression> -->
+<!--                         return logger.contains("Mapper"); -->
+<!--                     </expression> -->
+<!--                 </evaluator> -->
+<!--                 <OnMismatch>NEUTRAL</OnMismatch> -->
+<!--                 <OnMatch>DENY</OnMatch> -->
+<!--             </filter> -->
+
+        </appender>
+        
+        <appender name="ERR" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+				<level>error</level>
+				<onMatch>ACCEPT</onMatch>
+				<onMismatch>DENY</onMismatch>
+			</filter>
+        	<file>${LOG_PATH}/${ERR_LOG_FILE_NAME}.log</file>
+			<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+				<pattern>${LOG_PATTERN}</pattern>
+			</encoder>
+			<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+				<fileNamePattern>${LOG_PATH}/${ERR_LOG_FILE_NAME}.%d{yyyy-MM-dd}.log</fileNamePattern>
+				<maxHistory>31</maxHistory>
+			</rollingPolicy>
+        </appender>
+        
+
+        <root level="TRACE">
+            <appender-ref ref="FILE" />
+            <appender-ref ref="ERR" />
+        </root>
+        
+    </springProfile>
+    
+</configuration>
+
+
+
