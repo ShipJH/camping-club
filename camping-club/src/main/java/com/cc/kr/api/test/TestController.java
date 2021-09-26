@@ -17,7 +17,6 @@ import lombok.extern.slf4j.Slf4j;
 @RestController
 public class TestController {
 
-	//http://localhost:8080/test?longValue=777 호출 테스트 url.
 	@GetMapping(value = "/test")
 	public String test(Long longValue) { 
 		

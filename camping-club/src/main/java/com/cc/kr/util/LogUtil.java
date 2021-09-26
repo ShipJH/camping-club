@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 /**
  * @since 2021-08-26
  * @category 유틸 
- * 객체를 JsonString 화 하여, 로그를 보기 쉽도록 변경해주는 유
+ * 객체를 JsonString 화 하여, 로그를 보기 쉽도록 변경해주는 유틸
  * @author shipjh
  */
 @Slf4j
