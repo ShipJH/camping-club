@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Select;
 @Mapper
 public interface UserMapper {
 
-	@Select("SELECT id FROM member")
+	@Select("SELECT id FROM member LIMIT 1")
 	String getUser();
 
 	

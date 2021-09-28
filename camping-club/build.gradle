@@ -19,12 +19,17 @@ repositories {
 }
 
 dependencies {
+
+	//web config
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	
+	//devtools
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	
+	//test
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	
+	//lombok
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	
@@ -35,8 +40,18 @@ dependencies {
 	implementation group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '2.2.0'
 	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 	implementation group: 'mysql', name: 'mysql-connector-java', version: '8.0.26'
+	
 	// https://mvnrepository.com/artifact/org.bgee.log4jdbc-log4j2/log4jdbc-log4j2-jdbc4.1
 	implementation group: 'org.bgee.log4jdbc-log4j2', name: 'log4jdbc-log4j2-jdbc4.1', version: '1.16'
+
+	//swagger
+	implementation group: 'io.springfox', name: 'springfox-swagger2', version: '2.8.0'
+	implementation group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.8.0'
+
+
+
+
+
 }
 
 test {
